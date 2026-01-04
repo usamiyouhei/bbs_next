@@ -33,7 +33,8 @@ export async function signup(formData: FormData) {
       email,
       password: hashedPassword,
     });
-    console.log(await userRepository.save(newUser));
+    const savedUser = await userRepository.save(newUser);
+    await createSession(savedUser.id.toString());
   } catch (e) {
     console.error(e);
     return { error: "ユーザー登録中にエラーが発生しました" };
