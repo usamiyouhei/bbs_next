@@ -71,7 +71,7 @@ export default function SignupPage() {
         </form>
         <p style={{ textAlign: "center", fontSize: "14px" }}>
           すでにアカウントをお持ちですか？ <br />
-          <Link href="#" style={{ color: "#0070f3" }}>
+          <Link href="/" style={{ color: "#0070f3" }}>
             ログインはこちら
           </Link>
         </p>
