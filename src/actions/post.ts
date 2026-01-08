@@ -1,7 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { revalidateTag, cacheTag } from "next/cache";
+import { revalidateTag, cacheTag, updateTag } from "next/cache";
 import { AppDataSource, getRepository } from "@/utils/data-source";
 import { Post } from "@/entities/Post";
 import { verifySession } from "@/utils/session";
@@ -40,7 +40,7 @@ export async function createPost(formData: FormData) {
     console.error(e);
     return { error: "投稿の作成中にエラーが発生しました" };
   }
-  revalidateTag("posts", "max");
+  updateTag("posts");
   redirect("/");
 }
 
@@ -106,7 +106,7 @@ export async function deletePost(id: number) {
   }
 
   await postRepository.remove(post);
-  revalidateTag("posts", "max");
-  revalidateTag(`post-${id}`, "max");
+  updateTag("posts");
+  updateTag(`post-${id}`);
   redirect("/");
 }
